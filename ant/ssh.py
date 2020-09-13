@@ -27,6 +27,7 @@ class Client:
         self.cfg = copy.deepcopy(SERVER_DICT[server])
 
         self.ctx = context or {}
+        self._f_ctx = {}
         self.temp_dir = self.TEMP_DIR % secrets.token_hex(16)
 
     def _upload_file(self, sftp, path, remotepath):
@@ -47,9 +48,11 @@ class Client:
         sftp.chmod(remotepath, mod)
 
     def _set_env(self):
+        fc = copy.deepcopy(self._f_ctx)
         c = copy.deepcopy(self.cfg.get('context', {}))
         c.update(self.ctx)
-        return '\n'.join([f"export {k}='{v}'" for k, v in c.items()])
+        fc.update(c)
+        return '\n'.join([f"export {k}='{v}'" for k, v in fc.items()])
 
     def _eval_shell(self, path):
         return path
@@ -162,7 +165,9 @@ class Client:
             return b''.join(stdout_chunks), channel.recv_exit_status()
         return b''.join(stdout_chunks)
 
-    def exec(self):
+    def exec(self, f_ctx=None):
+        self._f_ctx = f_ctx or {}
+
         server_list = self.cfg.get('server', [])
 
         data = None
