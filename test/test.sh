@@ -1,6 +1,9 @@
 #!/usr/bin/bash
 
 echo $a
-whoamiaa
+echo $b
+echo $c
+echo $ips
+whoami
 #sleep 10
 echo ">>>ips:123<<<"
