@@ -10,7 +10,29 @@ import paramiko
 
 from .settings import SERVER_DICT
 from .file import DummyFile
-from .parse import Parse
+from .parse import Parse, FLOW_IPS
+
+
+class Server:
+    pass
+
+
+class IpServer(Server):
+    def __init__(self, host_list):
+        self.host_list = host_list
+
+    def server(self):
+        return self.host_list
+
+
+class FlowServer(Server):
+
+    def server(self, ctx):
+        ips = ctx.get(FLOW_IPS, '').split(Client.CTX_SEQ)
+        if not ips:
+            raise Exception(f'{FLOW_IPS} is empty, please check it')
+        # TODO: 去主机列表找到执行主机并返回
+        return
 
 
 class Client:

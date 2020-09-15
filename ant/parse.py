@@ -12,6 +12,8 @@ RULE_SUFFIX = '<<<'
 # RULE = f'{RULE_PREFIX}({RULE_KEY}){RULE_SEQ}({RULE_VALUE})?{RULE_SUFFIX}'
 RULE = '%s(%s)%s(%s)%s' % (RULE_PREFIX, RULE_KEY, RULE_SEQ, RULE_VALUE, RULE_SUFFIX)
 
+FLOW_IPS = 'ips'
+
 RUKE_KEY_HOOK_DICT = {
     # 'ips': lambda v: print(v),
 }
