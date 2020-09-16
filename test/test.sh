@@ -6,4 +6,4 @@ echo $c
 echo $ips
 whoami
 #sleep 10
-echo ">>>ips:123<<<"
+echo ">>>ips:192.168.52.201<<<"

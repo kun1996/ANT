@@ -2,14 +2,17 @@ import os
 
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
+FLOW_SERVER_NAME = 'flow'
+CTX_SEQ = ','
+
 HOST_DICT = {
-    'HOST1': [{
+    'HOST1': {
         'hostname': '192.168.52.201',
         'username': 'root',
         'password': '123456',
         'pkey': None,  # 私钥文件路径
         'timeout': 10,
-    }],
+    },
 }
 
 SERVER_DICT = {
@@ -22,7 +25,7 @@ SERVER_DICT = {
             'a': 'aaaaa',
             'c': 'aaaaa',
         },
-        'server': HOST_DICT['HOST1'],
+        'server': [HOST_DICT['HOST1']],
     },
     'BASE2': {
         'file': os.path.join(BASE_DIR, 'test/test.sh'),
@@ -32,7 +35,7 @@ SERVER_DICT = {
         'context': {
             'b': 'bbbbbb'
         },
-        'server': HOST_DICT['HOST1'],
+        'server': [HOST_DICT['HOST1']],
     },
     'IF': {
         'file': os.path.join(BASE_DIR, 'test/test_if.sh'),
@@ -42,7 +45,7 @@ SERVER_DICT = {
         'context': {
             'bool': 'if',
         },
-        'server': HOST_DICT['HOST1'],
+        'server': [HOST_DICT['HOST1']],
     },
     'IF_TRUE': {
         'file': os.path.join(BASE_DIR, 'test/test_if_true.sh'),
@@ -52,7 +55,7 @@ SERVER_DICT = {
         'context': {
             'bool': 'true',
         },
-        'server': HOST_DICT['HOST1'],
+        'server': FLOW_SERVER_NAME,
     },
     'IF_FALSE': {
         'file': os.path.join(BASE_DIR, 'test/test_if_false.sh'),
@@ -62,6 +65,6 @@ SERVER_DICT = {
         'context': {
             'bool': 'false',
         },
-        'server': HOST_DICT['HOST1'],
+        'server': [HOST_DICT['HOST1']],
     }
 }

@@ -3,36 +3,15 @@ import sys
 import stat
 import secrets
 import copy
-from typing import List, Dict
+from typing import Dict
 import select
 
 import paramiko
 
-from .settings import SERVER_DICT
+from .settings import SERVER_DICT, FLOW_SERVER_NAME, CTX_SEQ
 from .file import DummyFile
-from .parse import Parse, FLOW_IPS
-
-
-class Server:
-    pass
-
-
-class IpServer(Server):
-    def __init__(self, host_list):
-        self.host_list = host_list
-
-    def server(self):
-        return self.host_list
-
-
-class FlowServer(Server):
-
-    def server(self, ctx):
-        ips = ctx.get(FLOW_IPS, '').split(Client.CTX_SEQ)
-        if not ips:
-            raise Exception(f'{FLOW_IPS} is empty, please check it')
-        # TODO: 去主机列表找到执行主机并返回
-        return
+from .parse import Parse
+from .server import FlowServer
 
 
 class Client:
@@ -42,7 +21,7 @@ class Client:
 
     FILE_PERMISSION = stat.S_IRUSR | stat.S_IXUSR
     TEMP_DIR = '/tmp/__ant__%s'
-    CTX_SEQ = ','
+
     TIMEOUT = 30
 
     def __init__(self, server: str, context: Dict[str, str] = None):
@@ -190,10 +169,12 @@ class Client:
     def exec(self, f_ctx=None):
         self._f_ctx = f_ctx or {}
 
-        server_list = self.cfg.get('server', [])
+        server_list = self.cfg.get('server')
+        if server_list == FLOW_SERVER_NAME:
+            server_list = FlowServer().server(f_ctx)
 
         data = None
         for server in server_list:
             data = self.exec_one(server, data)
 
-        return {k: self.CTX_SEQ.join(v) for k, v in data.items()}
+        return {k: CTX_SEQ.join(v) for k, v in data.items()}
