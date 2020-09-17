@@ -172,6 +172,8 @@ class Client:
         server_list = self.cfg.get('server')
         if server_list == FLOW_SERVER_NAME:
             server_list = FlowServer().server(f_ctx)
+        else:
+            server_list = FlowServer().server(f_ctx, other_kw=server_list)
 
         data = None
         for server in server_list:

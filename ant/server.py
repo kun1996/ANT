@@ -17,10 +17,11 @@ class IpServer(Server):
 
 class FlowServer(Server):
 
-    def server(self, ctx):
-        ips = ctx.get(FLOW_IPS, '').split(CTX_SEQ)
+    def server(self, ctx, other_kw=None):
+        flow_ips = other_kw or FLOW_IPS
+        ips = ctx.get(flow_ips, '').split(CTX_SEQ)
         if not ips:
-            raise Exception(f'{FLOW_IPS} is empty, please check it')
+            raise Exception(f'{flow_ips} is empty, please check it')
 
         # 去主机列表找到执行主机并返回
         host_list = []
