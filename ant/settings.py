@@ -1,9 +1,16 @@
 import os
+import stat
 
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
 FLOW_SERVER_NAME = 'flow'
 CTX_SEQ = ','
+
+FILE_PERMISSION = stat.S_IRUSR | stat.S_IXUSR
+TEMP_DIR = '/tmp/__ant__%s'
+
+TIMEOUT = 30
+
 
 HOST_DICT = {
     'HOST1': {

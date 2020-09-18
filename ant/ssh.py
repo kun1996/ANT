@@ -1,6 +1,5 @@
 import os
 import sys
-import stat
 import secrets
 import copy
 from typing import Dict
@@ -8,7 +7,7 @@ import select
 
 import paramiko
 
-from .settings import SERVER_DICT, FLOW_SERVER_NAME, CTX_SEQ
+from .settings import SERVER_DICT, FLOW_SERVER_NAME, CTX_SEQ, TIMEOUT, TEMP_DIR, FILE_PERMISSION
 from .file import DummyFile
 from .parse import Parse
 from .server import FlowServer
@@ -19,10 +18,9 @@ class Client:
     SFTP_CLIENT = paramiko.SFTPClient
     POLICY = paramiko.AutoAddPolicy
 
-    FILE_PERMISSION = stat.S_IRUSR | stat.S_IXUSR
-    TEMP_DIR = '/tmp/__ant__%s'
-
-    TIMEOUT = 30
+    TEMP_DIR = TEMP_DIR
+    TIMEOUT = TIMEOUT
+    FILE_PERMISSION = FILE_PERMISSION
 
     def __init__(self, server: str, context: Dict[str, str] = None):
         self.cfg = copy.deepcopy(SERVER_DICT[server])
