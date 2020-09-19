@@ -4,6 +4,7 @@
       <div class="flow">
         <div class="flow-img">
           <img src="../assets/flow-demo.jpg" alt />
+          <span>流程占位</span>
         </div>
         <div class="flow-btn-group">
           <div class="flow-btn">
@@ -91,11 +92,6 @@ export default {
 .flow-img {
   @apply relative;
 }
-.flow-img img {
-  height: 8.5rem;
-  width: 100%;
-  @apply m-auto;
-}
 
 .flow-img:after {
   content: "";
@@ -119,6 +115,21 @@ export default {
   left: 500px;
 }
 
+.flow-img img {
+  height: 8.5rem;
+  width: 100%;
+  @apply m-auto;
+}
+.flow-img span {
+  font-weight: 700;
+  font-size: 24px;
+  color: #f7fafc;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
 .flow-btn-group {
   @apply border-t-2 border-gray-300 text-center;
 }
@@ -132,6 +143,4 @@ export default {
 .flow-btn:hover {
   transform: rotate(360deg);
 }
-
-
 </style>
