@@ -1,0 +1,16 @@
+@tailwind base;
+
+@tailwind components;
+
+@tailwind utilities;
+
+
+html {
+    font-size: 16px;
+    @apply h-full;
+}
+
+body {
+    @apply h-full;
+    @apply overflow-hidden;
+}
