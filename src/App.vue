@@ -27,7 +27,7 @@ export default {
   /* border-radius: 0.5rem; */
   width: 15rem;
   box-shadow: 0 0 3px 1px #cbd5e0;
-  @apply flex-row;
+  @apply flex-none;
   @apply rounded-lg;
   @apply mr-3 px-2 py-1;
 }

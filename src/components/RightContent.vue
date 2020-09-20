@@ -22,6 +22,9 @@
           <div class="flow-btn">
             <img src="../assets/start-blue.png" alt />
           </div>
+          <div class="flow-btn">
+            <img src="../assets/start-blue.png" alt />
+          </div>
         </div>
       </div>
       <div class="flow">1111</div>
@@ -138,9 +141,10 @@ export default {
   margin-right: 1px;
   margin-top: 0.25rem;
 
-  @apply h-full inline-block transition-transform duration-500;
+  @apply h-full inline-block ;
 }
 .flow-btn:hover {
   transform: rotate(360deg);
+  @apply transition-transform duration-500;
 }
 </style>
